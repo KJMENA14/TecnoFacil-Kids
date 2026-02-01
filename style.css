@@ -1,0 +1,198 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #eaf3ff;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #1fb6ff, #8b5cf6);
+  color: white;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.hero-text span {
+  color: #facc15;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+}
+
+.hero-img img {
+  max-width: 320px;
+  border-radius: 20px;
+}
+
+/* BOTÓN */
+.btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 28px;
+  background: #22c55e;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: transform 0.3s;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+/* CARDS */
+.card {
+  background: white;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.highlight {
+  background: #22c55e;
+  color: white;
+}
+
+.center {
+  text-align: center;
+}
+
+/* SOBRE NOSOTROS */
+.about-bg {
+  position: relative;
+  background-image: url("img/about-kids.jpeg"); /* TU IMAGEN */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  overflow: hidden;
+}
+
+/* Capa oscura encima de la imagen */
+.about-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55); /* OSCURIDAD */
+  z-index: 1;
+  border-radius: 25px;
+}
+
+/* Texto encima de la capa */
+.about-bg h2,
+.about-bg p {
+  position: relative;
+  z-index: 2;
+}
+
+
+
+/* SERVICIOS */
+.services {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.service-card {
+  background: white;
+  width: 220px;
+  padding: 25px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.4s;
+}
+
+.service-card:hover {
+  transform: scale(1.08) rotate(-1deg);
+}
+
+.service-card img {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+/* CONTACTO */
+.contact-img {
+  display: block;
+  margin: 0 auto 20px;
+  width: 120px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input,
+textarea,
+button {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+button {
+  background: #1fb6ff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+/* FOOTER */
+footer {
+  background: #0f172a;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+
+/* ANIMACIONES */
+.fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVO */
+@media (max-width: 600px) {
+  .hero {
+    text-align: center;
+  }
+}
