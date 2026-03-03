@@ -1,106 +1,112 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>TecnoFácil Kids</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- FUENTE -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>TecnoFácil Kids</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="hero-text">
-      <h1>TecnoFácil <span>Kids</span></h1>
-      <p>Aprende tecnología fácil, desde casa</p>
-      <a href="#contacto" class="btn">¡Inscríbete!</a>
+<header>
+    <div class="logo">
+        <h1>TecnoFácil <span>Kids</span></h1>
+    </div>
+    <a href="#contacto" class="btn">Contáctanos</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <h2>Aprende computación<br>de forma divertida</h2>
+        <p>Clases para niños enfocadas en Word, Excel y PowerPoint.</p>
+        <a href="#valor" class="btn big">Más información</a>
     </div>
 
     <div class="hero-img">
-      <!-- IMAGEN: niños usando laptop -->
-      <img src="img/hero-ninos.png" alt="Niños aprendiendo tecnología">
+        <img src="img/kids.png" alt="Niños aprendiendo">
     </div>
-  </header>
-
-  <!-- QUE OFRECEMOS -->
-  <section class="card fade">
-    <h2>¿Qué ofrecemos?</h2>
-    <p>
-      Clases y asesorías digitales de <strong>Word, Excel y PowerPoint</strong>
-      para niños y adolescentes.
-    </p>
-  </section>
-
-  <!-- PROPUESTA DE VALOR -->
-  <section class="card highlight fade">
-    <h2>Propuesta de valor</h2>
-    <p>
-      Aprenden a usar la tecnología correctamente,
-      mejoran sus tareas escolares y ganan confianza
-      sin salir de casa.
-    </p>
-  </section>
-
-  <!-- SOBRE NOSOTROS -->
-<section class="card about-bg fade">
-  <h2>Sobre nosotros</h2>
-  <p>
-    En TecnoFácil Kids ayudamos a niños y adolescentes a usar la computadora
-    como una herramienta útil, sencilla y divertida para la escuela.
-  </p>
 </section>
 
-  <!-- SERVICIOS -->
-  <section class="services-section fade">
-    <h2 class="center">Nuestros servicios</h2>
+<!-- PROPUESTA DE VALOR -->
+<section class="valor fade-in" id="valor">
+<h2>🚀 ¿Por qué elegirnos?</h2>
 
-    <div class="services">
-      <div class="service-card">
-        <img src="img/word.png" alt="Word">
-        <h3>Word</h3>
-        <p>Documentos y tareas escolares</p>
-      </div>
+<div class="beneficios">
+  <div><i class="fas fa-gamepad"></i> Clases dinámicas y divertidas</div>
+  <div><i class="fas fa-laptop-code"></i> Aprendizaje práctico</div>
+  <div><i class="fas fa-brain"></i> Desarrollo de habilidades digitales</div>
+</div>
+</section>
 
-      <div class="service-card">
-        <img src="img/excel.png" alt="Excel">
-        <h3>Excel</h3>
-        <p>Tablas y operaciones básicas</p>
-      </div>
+<!-- SOBRE NOSOTROS -->
+<section class="sobre fade-in">
+<h2>💡 Sobre Nosotros</h2>
+    <p>Somos un proyecto educativo enfocado en acercar la tecnología a los niños mediante clases dinámicas, prácticas y creativas que fortalecen su aprendizaje digital.</p>
+</section>
 
-      <div class="service-card">
-        <img src="img/powerpoint.png" alt="PowerPoint">
-        <h3>PowerPoint</h3>
-        <p>Presentaciones creativas</p>
-      </div>
+<!-- SERVICIOS -->
+<section class="servicios" id="servicios">
+    <h2>🎯 Servicios</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <img src="img/word.png" alt="Icono Word" class="icono">
+            <h3>Word</h3>
+            <p>Redacción de tareas, cuentos y trabajos escolares.</p>
+        </div>
+
+        <div class="card">
+            <img src="img/excel.png" alt="Icono Excel" class="icono">
+            <h3>Excel</h3>
+            <p>Tablas, sumas y organización de datos.</p>
+        </div>
+
+        <div class="card">
+            <img src="img/ppt.png" alt="Icono PowerPoint" class="icono">
+            <h3>PowerPoint</h3>
+            <p>Presentaciones creativas con imágenes y texto.</p>
+        </div>
+
     </div>
-  </section>
+</section>
 
-  <!-- CONTACTO -->
-  <section class="card fade" id="contacto">
-    <h2>Contacto</h2>
+<section class="cta">
+<h2>¡Inscripciones abiertas!</h2>
+<p>Cupos limitados para grupos pequeños.</p>
+<a href="#contacto" class="btn big">Aparta tu lugar</a>
+</section>
 
-    <img class="contact-img" src="img/contacto.png" alt="Contacto">
-
+<!-- FORMULARIO -->
+<section class="contacto" id="contacto">
+<h2>📩 Contáctanos</h2>
     <form id="formulario">
-      <input type="text" placeholder="Nombre del padre o madre" required>
-      <input type="text" placeholder="Nombre del estudiante" required>
-      <input type="number" placeholder="Edad del estudiante" required>
-      <input type="email" placeholder="Correo electrónico" required>
-      <textarea placeholder="Mensaje"></textarea>
-      <button type="submit">Enviar</button>
+        <input type="text" id="nombre" placeholder="Nombre completo" required>
+        <input type="email" id="correo" placeholder="Correo electrónico" required>
+        <textarea id="mensaje" placeholder="Escribe tu mensaje" required></textarea>
+        <button type="submit" class="btn">Enviar</button>
     </form>
-  </section>
+</section>
 
-  <footer>
-    © 2026 TecnoFácil Kids · Clases 100% digitales
-  </footer>
+<!-- PANEL ADMIN OCULTO -->
+<section class="admin" id="adminPanel" style="display:none;">
+  <h2>Panel de Administrador</h2>
+  <button class="cerrarBtn">Cerrar</button>
+  <div id="listaMensajes"></div>
+</section>
 
-  <!-- JS -->
-  <script src="script.js"></script>
+<!-- BOTÓN OCULTO -->
+<button id="adminBtn" style="position:fixed; bottom:20px; right:20px; opacity:0.2;">
+⚙️
+</button>
+
+<footer>
+    <p>© 2025 TecnoFácil Kids</p>
+</footer>
+
+<script type="module" src="script.js"></script>
 </body>
 </html>
