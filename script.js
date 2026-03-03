@@ -2,6 +2,10 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getFirestore, collection, addDoc, getDocs } 
 from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+
+console.log(adminBtn);
+console.log(adminPanel);
+console.log(cerrarBtn);
 // CONFIGURACIÓN FIREBASE
 const firebaseConfig = {
   apiKey: "AIzaSyCJowJAlY5PX-faTwfKzO3pwuHCquNmsfY",
