@@ -73,7 +73,34 @@
 
     </div>
 </section>
+<section class="paquetes" id="paquetes">
+  <h2>💳 Paquetes</h2>
 
+  <div class="cards">
+
+    <div class="card">
+      <h3>Plan Básico</h3>
+      <p>4 clases al mes</p>
+      <p><strong>$200</strong></p>
+      <button class="btn comprar" data-paquete="Plan Básico">Comprar</button>
+    </div>
+
+    <div class="card">
+      <h3>Plan Intermedio</h3>
+      <p>8 clases al mes</p>
+      <p><strong>$350</strong></p>
+      <button class="btn comprar" data-paquete="Plan Intermedio">Comprar</button>
+    </div>
+
+    <div class="card">
+      <h3>Plan Completo</h3>
+      <p>12 clases al mes</p>
+      <p><strong>$500</strong></p>
+      <button class="btn comprar" data-paquete="Plan Completo">Comprar</button>
+    </div>
+
+  </div>
+</section>
 <section class="cta">
 <h2>¡Inscripciones abiertas!</h2>
 <p>Cupos limitados para grupos pequeños.</p>
@@ -94,8 +121,14 @@
 <!-- PANEL ADMIN OCULTO -->
 <section class="admin" id="adminPanel" style="display:none;">
   <h2>Panel de Administrador</h2>
-<button id="cerrarBtn">Cerrar</button>
+
+  <button id="cerrarBtn">Cerrar</button>
+
+  <h3>📩 Mensajes</h3>
   <div id="listaMensajes"></div>
+
+  <h3>💳 Compras</h3>
+  <div id="listaCompras"></div>
 </section>
 
 <!-- BOTÓN OCULTO -->
