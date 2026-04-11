@@ -32,53 +32,69 @@ function mostrarToast(mensaje) {
 
 async function mostrarCompras() {
   const contenedor = document.getElementById("listaCompras");
+
+  // 🔥 evitar error si no existe
+  if (!contenedor) return;
+
   contenedor.innerHTML = "";
 
-  const querySnapshot = await getDocs(collection(db, "compras"));
+  try {
+    const querySnapshot = await getDocs(collection(db, "compras"));
 
-  querySnapshot.forEach((documento) => {
-    const data = documento.data();
+    querySnapshot.forEach((documento) => {
+      const data = documento.data();
 
-    contenedor.innerHTML += `
-      <div style="background:#fff; padding:15px; margin:10px; border-radius:10px;">
-        <p><strong>Nombre:</strong> ${data.nombre}</p>
-        <p><strong>Correo:</strong> ${data.correo}</p>
-        <p><strong>Paquete:</strong> ${data.paquete}</p>
+      contenedor.innerHTML += `
+        <div style="background:#fff; padding:15px; margin:10px; border-radius:10px;">
+          <p><strong>Nombre:</strong> ${data.nombre}</p>
+          <p><strong>Correo:</strong> ${data.correo}</p>
+          <p><strong>Paquete:</strong> ${data.paquete}</p>
 
-        <p><strong>Estado:</strong> 
-          <span style="
-            padding:5px 10px;
-            border-radius:10px;
-            color:white;
-            background:${data.estado === 'pagado' ? 'green' : 'orange'};
-          ">
-            ${data.estado}
-          </span>
-        </p>
+          <p><strong>Estado:</strong> 
+            <span style="
+              padding:5px 10px;
+              border-radius:10px;
+              color:white;
+              background:${data.estado === 'pagado' ? 'green' : 'orange'};
+            ">
+              ${data.estado}
+            </span>
+          </p>
 
-        <button onclick="cambiarEstado('${documento.id}', 'pagado')">Pagado</button>
-        <button onclick="cambiarEstado('${documento.id}', 'pendiente')">Pendiente</button>
+          <button onclick="cambiarEstado('${documento.id}', 'pagado')">Pagado</button>
+          <button onclick="cambiarEstado('${documento.id}', 'pendiente')">Pendiente</button>
 
-        <hr>
-      </div>
-    `;
-  });
+          <hr>
+        </div>
+      `;
+    });
+
+  } catch (error) {
+    console.error("Error al cargar compras:", error);
+  }
 }
-
 window.cambiarEstado = async (id, nuevoEstado) => {
   try {
     const ref = doc(db, "compras", id);
 
+    // 🔥 SOLO Firebase aquí
     await updateDoc(ref, {
       estado: nuevoEstado
     });
 
     mostrarToast("Estado actualizado ✅");
-    await mostrarCompras(); // 🔥 refresca sin recargar
 
   } catch (error) {
     console.error(error);
     mostrarToast("Error al actualizar ❌");
+    return; // 🔥 salir si falla Firebase
+  }
+
+  // 🔥 esto ya NO rompe el flujo
+  try {
+    await mostrarCompras();
+  } catch (error) {
+    console.error("Error refrescando UI:", error);
   }
 };
 
