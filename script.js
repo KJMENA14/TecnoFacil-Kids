@@ -3,9 +3,6 @@ import { getFirestore, collection, addDoc, getDocs }
 from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 
-console.log(adminBtn);
-console.log(adminPanel);
-console.log(cerrarBtn);
 // CONFIGURACIÓN FIREBASE
 const firebaseConfig = {
   apiKey: "AIzaSyCJowJAlY5PX-faTwfKzO3pwuHCquNmsfY",
@@ -49,6 +46,44 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // =========================
+// COMPRAS
+// =========================
+
+const botonesComprar = document.querySelectorAll(".comprar");
+
+botonesComprar.forEach(btn => {
+  btn.addEventListener("click", async () => {
+
+    const paquete = btn.dataset.paquete;
+
+    const nombre = prompt("Ingresa tu nombre:");
+    const correo = prompt("Ingresa tu correo:");
+
+    if (!nombre || !correo) {
+      alert("Datos incompletos ❌");
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, "compras"), {
+        nombre: nombre,
+        correo: correo,
+        paquete: paquete,
+        estado: "pendiente",
+        fecha: new Date()
+      });
+
+      alert("Compra registrada 🎉\nEstado: pendiente de pago");
+
+    } catch (error) {
+      console.error(error);
+      alert("Error al guardar compra ❌");
+    }
+
+  });
+});
+
+  // =========================
   // PANEL ADMIN
   // =========================
   const adminBtn = document.getElementById("adminBtn");
@@ -63,6 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (password === passwordAdmin) {
       adminPanel.style.display = "block";
       mostrarMensajes();
+      mostrarCompras();
     } else {
       alert("Contraseña incorrecta ❌");
     }
@@ -91,5 +127,26 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     });
   }
+
+  async function mostrarCompras() {
+  const contenedor = document.getElementById("listaCompras");
+  contenedor.innerHTML = "";
+
+  const querySnapshot = await getDocs(collection(db, "compras"));
+
+  querySnapshot.forEach((doc) => {
+    const data = doc.data();
+
+    contenedor.innerHTML += `
+      <div style="background:#fff; padding:15px; margin:10px; border-radius:10px;">
+        <p><strong>Nombre:</strong> ${data.nombre}</p>
+        <p><strong>Correo:</strong> ${data.correo}</p>
+        <p><strong>Paquete:</strong> ${data.paquete}</p>
+        <p><strong>Estado:</strong> ${data.estado}</p>
+        <hr>
+      </div>
+    `;
+  });
+}
 
 });
