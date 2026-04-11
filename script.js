@@ -1,6 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs } 
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 
 // CONFIGURACIÓN FIREBASE
@@ -48,41 +47,55 @@ document.addEventListener("DOMContentLoaded", () => {
   // =========================
 // COMPRAS
 // =========================
+let paqueteSeleccionado = "";
+
+const modal = document.getElementById("modalCompra");
+const cerrarModal = document.getElementById("cerrarModal");
+const confirmarCompra = document.getElementById("confirmarCompra");
 
 const botonesComprar = document.querySelectorAll(".comprar");
 
 botonesComprar.forEach(btn => {
-  btn.addEventListener("click", async () => {
-
-    const paquete = btn.dataset.paquete;
-
-    const nombre = prompt("Ingresa tu nombre:");
-    const correo = prompt("Ingresa tu correo:");
-
-    if (!nombre || !correo) {
-      alert("Datos incompletos ❌");
-      return;
-    }
-
-    try {
-      await addDoc(collection(db, "compras"), {
-        nombre: nombre,
-        correo: correo,
-        paquete: paquete,
-        estado: "pendiente",
-        fecha: new Date()
-      });
-
-      alert("Compra registrada 🎉\nEstado: pendiente de pago");
-
-    } catch (error) {
-      console.error(error);
-      alert("Error al guardar compra ❌");
-    }
-
+  btn.addEventListener("click", () => {
+    paqueteSeleccionado = btn.dataset.paquete;
+    modal.style.display = "flex";
   });
 });
 
+cerrarModal.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+confirmarCompra.addEventListener("click", async () => {
+
+  const nombre = document.getElementById("modalNombre").value;
+  const correo = document.getElementById("modalCorreo").value;
+
+  if (!nombre || !correo) {
+    alert("Completa los datos ❌");
+    return;
+  }
+
+  try {
+    await addDoc(collection(db, "compras"), {
+      nombre,
+      correo,
+      paquete: paqueteSeleccionado,
+      estado: "pendiente",
+      fecha: new Date()
+    });
+
+    alert("Compra registrada 🎉");
+    modal.style.display = "none";
+
+    // limpiar inputs (pro)
+    document.getElementById("modalNombre").value = "";
+    document.getElementById("modalCorreo").value = "";
+
+  } catch (error) {
+    alert("Error ❌");
+  }
+});
   // =========================
   // PANEL ADMIN
   // =========================
@@ -128,21 +141,33 @@ botonesComprar.forEach(btn => {
     });
   }
 
-  async function mostrarCompras() {
+ async function mostrarCompras() {
   const contenedor = document.getElementById("listaCompras");
   contenedor.innerHTML = "";
 
   const querySnapshot = await getDocs(collection(db, "compras"));
 
-  querySnapshot.forEach((doc) => {
-    const data = doc.data();
+  querySnapshot.forEach((documento) => {
+    const data = documento.data();
 
     contenedor.innerHTML += `
       <div style="background:#fff; padding:15px; margin:10px; border-radius:10px;">
         <p><strong>Nombre:</strong> ${data.nombre}</p>
         <p><strong>Correo:</strong> ${data.correo}</p>
         <p><strong>Paquete:</strong> ${data.paquete}</p>
-        <p><strong>Estado:</strong> ${data.estado}</p>
+        <p><strong>Estado:</strong> 
+          <span style="
+            padding:5px 10px;
+            border-radius:10px;
+            color:white;
+            background:${data.estado === 'pagado' ? 'green' : 'orange'};
+          ">
+            ${data.estado}
+          </span>
+        </p>
+        <button onclick="cambiarEstado('${documento.id}', 'pagado')">Marcar pagado</button>
+        <button onclick="cambiarEstado('${documento.id}', 'pendiente')">Pendiente</button>
+
         <hr>
       </div>
     `;
@@ -150,3 +175,19 @@ botonesComprar.forEach(btn => {
 }
 
 });
+
+window.cambiarEstado = async (id, nuevoEstado) => {
+  try {
+    const ref = doc(db, "compras", id);
+    await updateDoc(ref, {
+      estado: nuevoEstado
+    });
+
+    alert("Estado actualizado ✅");
+    location.reload();
+
+  } catch (error) {
+    console.error(error);
+    alert("Error al actualizar ❌");
+  }
+};
