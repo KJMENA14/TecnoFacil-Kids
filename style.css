@@ -229,6 +229,14 @@ section{
     display:inline-block;
     margin-top:10px;
 }
+
+.paquetes{
+    background:#e8f5e9;
+}
+
+.paquetes .card{
+    text-align:center;
+}
 /* FORM */
 .contacto{
     background: linear-gradient(135deg, #ff6b6b, #ffb347);
