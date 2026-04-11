@@ -263,6 +263,24 @@ section{
   margin: 10px 0;
   padding: 10px;
 }
+
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #333;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  opacity: 0;
+  transition: 0.5s;
+  z-index: 999;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
 /* FORM */
 .contacto{
     background: linear-gradient(135deg, #ff6b6b, #ffb347);

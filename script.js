@@ -85,7 +85,7 @@ confirmarCompra.addEventListener("click", async () => {
       fecha: new Date()
     });
 
-    alert("Compra registrada 🎉");
+    mostrarToast("Compra registrada 🎉");
     modal.style.display = "none";
 
     // limpiar inputs (pro)
@@ -183,11 +183,21 @@ window.cambiarEstado = async (id, nuevoEstado) => {
       estado: nuevoEstado
     });
 
-    alert("Estado actualizado ✅");
-    location.reload();
+    mostrarToast("Estado actualizado ✅");
+    mostrarCompras();
 
   } catch (error) {
     console.error(error);
     alert("Error al actualizar ❌");
   }
 };
+
+function mostrarToast(mensaje) {
+  const toast = document.getElementById("toast");
+  toast.textContent = mensaje;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000);
+}
