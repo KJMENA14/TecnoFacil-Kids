@@ -1,5 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getFirestore, collection, addDoc, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
 
 // =========================
 // FIREBASE
@@ -63,6 +65,7 @@ async function mostrarCompras() {
 
           <button onclick="cambiarEstado('${documento.id}', 'pagado')">Pagado</button>
           <button onclick="cambiarEstado('${documento.id}', 'pendiente')">Pendiente</button>
+          <button onclick="eliminarCompra('${documento.id}')">Eliminar</button>
 
           <hr>
         </div>
@@ -221,10 +224,30 @@ document.addEventListener("DOMContentLoaded", () => {
           <p><strong>Nombre:</strong> ${data.nombre}</p>
           <p><strong>Correo:</strong> ${data.correo}</p>
           <p><strong>Mensaje:</strong> ${data.mensaje}</p>
+
+          <button onclick="eliminarMensaje('${docu.id}')">Eliminar</button>
+
           <hr>
         </div>
       `;
     });
   }
+
+  window.eliminarMensaje = async (id) => {
+  if (!confirm("¿Eliminar mensaje?")) return;
+
+  await deleteDoc(doc(db, "contactos", id));
+  mostrarToast("Mensaje eliminado 🗑️");
+  mostrarMensajes();
+};
+
+window.eliminarCompra = async (id) => {
+  if (!confirm("¿Eliminar compra?")) return;
+
+  await deleteDoc(doc(db, "compras", id));
+  mostrarToast("Compra eliminada 🗑️");
+  mostrarCompras();
+};
+
 
 });
