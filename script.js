@@ -225,8 +225,8 @@ document.addEventListener("DOMContentLoaded", () => {
           <p><strong>Correo:</strong> ${data.correo}</p>
           <p><strong>Mensaje:</strong> ${data.mensaje}</p>
 
-          <button onclick="eliminarMensaje('${docu.id}')">Eliminar</button>
-
+          <button onclick="eliminarMensaje('${doc.id}')">Eliminar</button>
+          
           <hr>
         </div>
       `;
